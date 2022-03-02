@@ -185,6 +185,6 @@ class ProductImageViewSet(ModelViewSet):
 
     #     storage.save(image_file.name, File(image_file))
 
-    #     upload.delay(product_id=product_id, file_name=image_file.name)
+    #     upload.delay(product_id=product_id, path=storage.path(image_file.name), file_name=image_file.name)
 
     #     return Response('Uploading...')
