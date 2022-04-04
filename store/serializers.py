@@ -3,6 +3,9 @@ from django.db import transaction
 from rest_framework import serializers
 from .signals import order_created
 from .models import Cart, CartItem, Customer, Order, OrderItem, Product, Collection, ProductImage, Review
+# from django.core.files import File
+# from django.core.files.storage import FileSystemStorage
+# from .tasks import upload
 
 
 class CollectionSerializer(serializers.ModelSerializer):
@@ -21,6 +24,17 @@ class ProductImageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         product_id = self.context['product_id']
         return ProductImage.objects.create(product_id=product_id, **validated_data)
+
+    # def create(self, validated_data):
+    #     product_id = self.context['product_id']
+    #     image_file = self.context['image_file']
+    #     storage = FileSystemStorage()
+        
+    #     image_file.name = storage.get_available_name(image_file)
+
+    #     storage.save(image_file.name, File(image_file))
+
+    #     return upload.delay(product_id=product_id, path=storage.path(image_file.name), file_name=image_file.name)
 
 
 class ProductSerializer(serializers.ModelSerializer):

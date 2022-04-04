@@ -15,9 +15,6 @@ from .filters import ProductFilter
 from .models import Cart, CartItem, Collection, Customer, Order, OrderItem, Product, ProductImage, Review
 from .serializers import AddCartItemSerializer, CartItemSerializer, CartSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductImageSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer, UpdateOrderSerializer
 # from django.core.mail import send_mail
-# from django.core.files import File
-# from django.core.files.storage import FileSystemStorage
-# from .tasks import upload
 
 
 class ProductViewSet(ModelViewSet):
@@ -174,17 +171,15 @@ class ProductImageViewSet(ModelViewSet):
     #     return response
 
     # def create(self, request, *args, **kwargs):
-        
     #     product_id = self.kwargs['product_pk']
-
     #     image_file = self.request.FILES['image']
-
-    #     storage = FileSystemStorage()
-        
-    #     image_file.name = storage.get_available_name(image_file)
-
-    #     storage.save(image_file.name, File(image_file))
-
-    #     upload.delay(product_id=product_id, path=storage.path(image_file.name), file_name=image_file.name)
-
-    #     return Response('Uploading...')
+    #     serializer = ProductImageSerializer(
+    #         data=request.data,
+    #         context={
+    #             'product_id': product_id,
+    #             'image_file': image_file
+    #         }
+    #     )
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response('Upload Started...')
